@@ -1,0 +1,89 @@
+
+
+*{
+    box-sizing: border-box;
+}
+
+
+ol{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 0px;
+    width: 800px;
+}
+
+div{
+    text-align: center;
+}
+
+li{
+    background-color: #9190c1;
+    height: 100px;
+    width: 150px;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 35px;
+    font-size: 20px;
+
+}
+
+.primer-dia{
+    grid-column-start: 5;
+    padding: 35px;
+    
+}
+
+.dia{
+    height: 60px;
+    background-color: #9190c1;
+    padding: 15px;
+    
+   
+}
+
+nav
+{background-color: #4ec5c6;
+    height: 65px;
+    opacity: 0.8;
+}
+
+.calendario,.fichaje, .reportes,.salir,.foto {
+  
+    display: inline;
+    margin:0px 25px 0px 10px;
+    background-color: #d5d2d2;
+    padding: 26px 10px 12px 10px;
+    
+
+}
+
+.calendario:hover,.fichaje:hover,.reportes:hover,.salir:hover 
+{background-color: #d56363
+
+}
+
+
+body{
+
+    background-image: url(../bg_calendar.jpg);
+    background-size: cover;
+    
+}
+
+.navegacion{
+  float: right;
+  font-size: 25px;
+}
+
+h1{
+    text-align: center;
+}
+
+img{
+    width: 30px;
+}
+
+.foto{
+    border-radius: 50px;
+}
