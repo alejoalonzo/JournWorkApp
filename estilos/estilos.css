@@ -1,0 +1,174 @@
+/**/
+@import url("https://fonts.googleapis.com/css?family=Pacifico|Roboto:300,700");
+
+#registro,
+#login {
+  background-color: #ffae12;
+}
+/* #cajaContenedora {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+.form-control {
+  margin-top: 10px !important;
+}
+
+/****************************NAVBAR****************************************************/
+.navbar {
+  background-color: #ffae12;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  min-height: 100px;
+  font-size: 1.5rem;
+}
+
+.nav-link {
+  color: #ffffff;
+  margin-right: 30px;
+}
+
+.nav-link:hover {
+  color: #4e4e4e;
+  background-color: #239e5a;
+  border-radius: 3px;
+}
+
+.logo-brand {
+  min-width: 90px;
+  max-width: 110px;
+}
+
+.navbar-toggler {
+  font-size: 40px;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+}
+.imgNavbar {
+  border-radius: 50% !important;
+}
+
+/********************************HEADER***********************************************/
+#header {
+  background-image: url("../media/header3.jpg");
+  background-color: #cccccc;
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.btnFichaje {
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.titleHeader {
+  margin-top: 150px;
+  max-width: 815px;
+  margin: auto;
+  padding-top: 75px;
+}
+
+/********************************** CALENDARIO *****************************************************/
+
+#calendarioContenedor {
+  width: 1400px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  height: 1000px;
+}
+
+/*cabecera de la página*/
+h1 {
+  text-align: center;
+  padding: 0.5em;
+}
+/*div principal del calendario*/
+#calendario {
+  border: 4px double black;
+  background-color: #fffafa;
+  text-align: center;
+}
+/*tabla del calendario*/
+#diasc {
+  border: 1px solid black;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+#diasc th,
+#diasc td {
+  font: normal 14pt arial;
+  width: 70px;
+  height: 30px;
+}
+#diasc th {
+  color: #990099;
+  background-color: #5ecdec;
+}
+#diasc td {
+  color: #492736;
+  background-color: #9bf5ff;
+}
+/*línea de la fecha actual*/
+#fechaactual {
+  font: bold 12pt arial;
+  padding: 0.4em;
+}
+#fechaactual i {
+  cursor: pointer;
+}
+#fechaactual i:hover {
+  color: blue;
+  text-decoration: underline;
+}
+/*formulario de busqueda de fechas*/
+#buscafecha {
+  background-color: #663366;
+  color: #9bf5ff;
+  padding: 5px;
+}
+#buscafecha select,
+#buscafecha input {
+  background-color: #9bf5ff;
+  color: #990099;
+  font: bold 10pt arial;
+}
+#buscafecha [type="text"] {
+  text-align: center;
+}
+#buscafecha [type="button"] {
+  cursor: pointer;
+}
+/*cabecera del calendario*/
+#anterior {
+  float: left;
+  width: 100px;
+  font: bold 12pt arial;
+  padding: 0.5em 0.1em;
+  cursor: pointer;
+}
+#posterior {
+  float: right;
+  width: 100px;
+  font: bold 12pt arial;
+  padding: 0.5em 0.1em;
+  cursor: pointer;
+}
+#anterior:hover {
+  color: blue;
+  text-decoration: underline;
+}
+#posterior:hover {
+  color: blue;
+  text-decoration: underline;
+}
+#titulos {
+  padding: 0.2em;
+}
+
+/**********************FIN CALENDARIO****************************************/
