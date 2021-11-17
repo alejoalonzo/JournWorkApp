@@ -90,7 +90,7 @@ function escribirdias() {
                  celda=fila.getElementsByTagName("td")[j];
                  celda.innerHTML=midia;
                  //Recuperar estado inicial al cambiar de mes:
-                 celda.style.backgroundColor="#9bf5ff";
+                 celda.style.backgroundColor="#e8e8db";
                  celda.style.color="#492736";
                  //domingos en rojo
                  if (j==6) { 
@@ -163,5 +163,25 @@ function mifecha() {
               escribirdias() //escribir tabla
               }
          }
+
+
+
+        // Ejemplo para buscar dias:
+        // <script>
+        // var d=new Date();
+        // if ((d.getDay==0) || (d.getDay==6)) document.write("Hoy es feriado");
+        // else document.write("Hoy es dia habil");
+        // </script>
+        // con lo cual, puedes saber si es feriado.
+        // Para el resto de las fiestas, deberias tener un array con los días fiesta:
+        // var fiestas=new Array(new Array(25,4),new Array(25,11),new Array(12,11));
+        // y luego verificar...
+        // for (var i=0;i<fiestas.length; i++) {
+        // if ((d.getMonth()==fiestas[1]) && (d.getDate()==fiestas[0])) alert('Hoy es fiesta!');
+        // }
+        // Esto generaría para los feriados del 25 de mayo, 12 de diciembre y 25 de diciembre.
+        // Suerte!
+        // Saludos.
+        // Pablo.
 
 //*********************************************************BOTON FICHAJE************************************** */
