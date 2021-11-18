@@ -69,7 +69,7 @@
   margin-top: 150px;
   max-width: 815px;
   margin: auto;
-  padding-top: 75px;
+  padding-top: 0px;
 }
 
 /********************************** CALENDARIO *****************************************************/
@@ -187,7 +187,245 @@ ffdf65
 
 /**********************FIN CALENDARIO****************************************/
 
-/*Fichaje*****************************************************************/
+/***********************************FICHAJE***************************************/
 .imgBackgroundFichaje {
   position: fixed;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+/* #tablaFichaje {
+  overflow: auto;
+} */
+
+/*********************************BOTON FICHAJE********************************************/
+
+:root {
+  --timing: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --primary: #f4f7f5;
+}
+
+/*@media (max-width: 420px) {
+  body {
+    background: var(--primary);
+  }
+}*/
+
+main {
+  display: grid;
+  place-items: center;
+  gap: 1em 0;
+}
+
+/* Heading effect */
+.heading {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  display: grid;
+  grid: auto / auto auto;
+}
+
+.heading > span {
+  margin-left: 0.25em;
+  font-weight: 700;
+}
+
+.heading span {
+  overflow: hidden;
+  display: inline-flex;
+  transition: 0.6s;
+}
+.heading > span,
+.heading > span.on span {
+  transform: translateY(100%);
+  grid-area: 1 / 2;
+}
+.heading > span span,
+.heading > span.on {
+  transform: translateY(-100%);
+}
+
+.heading.active span.off,
+.heading.active span.off span,
+.heading:not(.active) span.on,
+.heading:not(.active) span.on span {
+  transform: none;
+}
+
+button {
+  --w: 6em;
+  --bg: rgb(var(--rgb));
+  --bga: rgba(var(--rgb), 0.4); /* Safari fix */
+  -webkit-appearance: none;
+  border: none;
+  font-size: 100%;
+  width: var(--w);
+  height: var(--w);
+  background: var(--bg);
+  box-shadow: 0 3px 12px 2px var(--bga);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.1s transform, 0.3s box-shadow;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+
+button > * {
+  pointer-events: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:after {
+  --bg: rgb(var(--rgb));
+  content: "";
+  position: absolute;
+  top: -15%;
+  left: -15%;
+  width: 200%;
+  height: 200%;
+  background: var(--bg);
+  border-radius: inherit;
+  transform: translate(5%, 5%) scale(0.03);
+  pointer-events: none;
+}
+
+button.animating:after {
+  animation: c 0.5s cubic-bezier(0.5, 0, 0.5, 1) backwards;
+}
+
+button.active,
+button:not(.active):after {
+  --rgb: 64, 227, 120;
+}
+
+button:not(.active),
+button.active:after {
+  --rgb: 229, 55, 94;
+}
+
+@keyframes c {
+  to {
+    transform: none;
+  }
+}
+
+button span {
+  display: inline-block;
+  position: relative;
+  margin-top: 5px;
+}
+button b {
+  --w: 7px;
+  overflow: hidden;
+  border-radius: var(--w);
+  display: grid;
+  width: var(--w);
+  height: 35px;
+  top: 0;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 3;
+  will-change: transform;
+}
+button b:before {
+  content: "";
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--w);
+  transform: translateY(-15px);
+  transition-timing-function: var(--timing);
+  transition: 0.5s;
+}
+
+button.active b:before {
+  transform: translateY(12px);
+  transition-delay: 0.27s;
+  transition-timing-function: cubic-bezier(0.25, 0.25, 0.25, 1.25);
+}
+
+button svg {
+  --dash: 190;
+  stroke-linecap: round;
+  stroke-dasharray: var(--dash);
+  stroke-dashoffset: var(--dash);
+  width: 46px;
+  height: 46px;
+  transform: scaleX(-1) rotate(-89deg);
+  transition: 0.4s;
+  transition-timing-function: var(--timing);
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  will-change: transform, stroke-dashoffset;
+}
+button:not(.active) svg {
+  stroke-dashoffset: 40;
+  transform: scaleX(-1) rotate(-52deg);
+  transition: 0.5s 0.25s;
+}
+
+aside {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 0 2em 2em;
+  font-family: "Pacifico", cursive;
+}
+
+aside a {
+  text-decoration: underline;
+  color: #e65289;
+  display: flex;
+  align-items: center;
+}
+
+aside a:hover,
+aside a:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+.dribbble-logo {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 }
