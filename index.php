@@ -51,7 +51,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#" id="Salir">Salir</a>
+            <a class="nav-link" href="logout.php" id="Salir">Salir</a>
           </li>
           <ul class="nav">
           
@@ -104,6 +104,9 @@
   </div>
 
   <!-- ------------------------------------FIN--BOTON------------------------------------------------------ -->
+  
+
+
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
