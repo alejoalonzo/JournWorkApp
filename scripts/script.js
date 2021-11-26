@@ -230,31 +230,3 @@ function mifecha() {
 // Pablo.
 
 //*********************************************************BOTON FICHAJE************************************** */
-const btn = document.querySelector(".btn");
-const heading = document.querySelector(".heading");
-
-let active = false;
-
-const turnOn = () => {
-  btn.classList.add("active");
-  heading.classList.add("active");
-};
-
-const turnOff = () => {
-  btn.classList.remove("active");
-  heading.classList.remove("active");
-};
-
-const toggleAnimation = () => {
-  btn.classList.remove("animating");
-  active ? turnOn() : turnOff();
-};
-
-function clickHandler() {
-  active = !active;
-  btn.classList.add("animating");
-
-  btn.addEventListener("animationend", toggleAnimation);
-}
-
-btn.addEventListener("click", clickHandler);
