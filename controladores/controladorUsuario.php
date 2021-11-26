@@ -12,18 +12,18 @@ require "conexion.php";
         }
     }
 
-    function obtenerUsuario($idUsuario, $contrasenaUsuario){
+    function obtenerUsuario($nombreUsuario, $contrasenaUsuario){
 
         global $conexion;
 
         //Es menos bulnerable obtener los datos con los '?'
         $consulta = "SELECT id, nombre, correo
                     FROM usuarios
-                    WHERE id = ? AND contrasena =?
+                    WHERE nombre = ? AND contrasena =?
                     ";
         //Este codigo traduce la consulta a 
         $stmt = $conexion->prepare($consulta);
-        $stmt->bind_param('ss', $idUsuario, $contrasenaUsuario);//vinculacion(bind), 'ss' se refiere a un string y otro string
+        $stmt->bind_param('ss', $nombreUsuario, $contrasenaUsuario);//vinculacion(bind), 'ss' se refiere a un string y otro string
         $stmt->execute();//ejejucar
         $resultado = $stmt->get_result();//obtener resultado
 
@@ -54,13 +54,13 @@ require "conexion.php";
         }
     }
 
-    function hacerLogin($usuario){
+    function hacerLogin($nombre){
         //Si el usuario y contraseña es correcto, la sseion del index va a tener un valor y si no lo va a mandar al login
-        $idUsuario = $usuario["id"];
-        $_SESSION["usuario"] = $usuario;
+        $nombreUsuario = $nombre["nombre"];
+        $_SESSION["usuario"] = $nombre;
 
         //Asignar cookie, le paso un nombre y el usuario y tambn tiempo (300s) corto para ir probando 
-        setcookie("ifpUser", $idUsuario, time()+300);
+        setcookie("ifpUser", $nombreUsuario, time()+300);
         
         header("Location: index.php");//Y lo mandamos al index
         exit();

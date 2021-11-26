@@ -44,8 +44,8 @@
         <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
           <input class="form-control" type="text" placeholder="Usuario" name="name" required/>
           <input class="form-control" type="password" placeholder="Contraseña" name="password" required/>
-          <input class="form-control" type="submit" placeholder="Entrar" name="entrar"/>
-          <input class="form-control" type="submit" placeholder="Registrar" name="registrar"/>
+          <input class="form-control" type="submit" placeholder="Entrar" name="entrar" value="Entrar"/>
+          <input class="form-control" type="submit" placeholder="Registrar" name="registrar" value="Registrar"/>
         </form>
       </div>
     </div>

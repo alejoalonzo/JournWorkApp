@@ -38,17 +38,17 @@
           <img src="./media/Logo.png" alt="" />
         </div>
         <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-          <input class="form-control" type="text" placeholder="Nombre" name="name" />
-          <input class="form-control" type="text" placeholder="Contraseña" name="password" />
+          <input class="form-control" type="text" placeholder="Nombre" name="name" required/> 
+          <input class="form-control" type="password" placeholder="Contraseña" name="password" required/>
           <input
             class="form-control"
-            type="text"
-            placeholder="Confirmar contraseña" name="password2"
+            type="password"
+            placeholder="Confirmar contraseña" name="password2" required
           />
           <input
             class="form-control"
             type="text"
-            placeholder="Correo Electronico" name="email"
+            placeholder="Correo Electronico" name="email" required
           />
           <input class="form-control" type="submit" placeholder="Registrar" value="Registro" name="registro"/>
         </form>
