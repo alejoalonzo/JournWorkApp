@@ -1,3 +1,20 @@
+<?php  require "controladores/controladorUsuario.php";?>
+
+<?php
+//registrarUsuario('26', '456', 'asd@gmail.com', 'Javi');
+    session_start();//Siempre iniciar la session
+    if(isset($_POST["registro"])){//si le da al boton de registrar...
+        //envio estos parametros por POST para crear usuario
+        registrarUsuario(rand(1,99), 
+                            $_POST['password'],
+                            $_POST['email'],
+                            $_POST['name']);
+                            
+    }
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -10,7 +27,7 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../estilos/estilos.css" />
+    <link rel="stylesheet" href="./estilos/estilos.css" />
     <title>Registro</title>
   </head>
 
@@ -18,20 +35,23 @@
     <div class="row justify-content-center cen pt-5 mt-5">
       <div class="col-md-3">
         <div>
-          <img src="../media/Logo.png" alt="" />
+          <img src="./media/Logo.png" alt="" />
         </div>
-        <input class="form-control" type="text" placeholder="Nombre" />
-        <input class="form-control" type="text" placeholder="Contraseña" />
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Confirmar contraseña"
-        />
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Correo Electronico"
-        />
+        <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+          <input class="form-control" type="text" placeholder="Nombre" name="name" />
+          <input class="form-control" type="text" placeholder="Contraseña" name="password" />
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Confirmar contraseña" name="password2"
+          />
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Correo Electronico" name="email"
+          />
+          <input class="form-control" type="submit" placeholder="Registrar" value="Registro" name="registro"/>
+        </form>
       </div>
     </div>
 
