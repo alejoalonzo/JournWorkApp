@@ -17,7 +17,16 @@ function heroSlideShow() {
   document.getElementById("header").style.backgroundImage =
     listaImgBg[bgCounter];
 }
-
+//----------------------------------------------------ALERT ERROR LOGIN----------------------------
+function contrasenaIncorrecta() {
+  Swal.fire({
+    confirmButtonColor: "#5b789b",
+    icon: "error",
+    title: "Oops...",
+    text: "El usuario o la contraseña son incorrectos",
+    footer: '<a href="./registro.php">No estoy registrado</a>',
+  });
+}
 //-------------------------------------------------------CALENDARIO---------------------------------
 //Arrays de datos:
 meses = [

@@ -2,11 +2,11 @@
 require "conexion.php";
     function comprobarLogin(){
         //La cookie  guarda los datos aunque se cierre el navegador, solo con el logout se puede salir y la SESSION los guarda en el el server
-        if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
-            $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
+        if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["nombre"])){
+            $_SESSION["nombre"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
             //prueba-->echo "Entro en el if de la cookie";
         }
-        if(!isset($_SESSION["usuario"])){//si no existe dentro de la session el valor login, que me mande al login
+        if(!isset($_SESSION["nombre"])){//si no existe dentro de la session el valor login, que me mande al login
             header("Location: login.php");
             exit();
         }
@@ -33,18 +33,18 @@ require "conexion.php";
         }
     }
 
-    function obtenerUsuarioPorId($id){
+    function obtenerUsuarioPorId($nombre){
 
         global $conexion;
 
         //Es menos bulnerable obtener los datos con los '?'
         $consulta = "SELECT id, nombre, correo
                     FROM usuarios
-                    WHERE id = ?
+                    WHERE nombre = ?
                     ";
         //Este codigo traduce la consulta a 
         $stmt = $conexion->prepare($consulta);
-        $stmt->bind_param('s', $id);//vinculacion(bind), 'ss' se refiere a un string y otro string
+        $stmt->bind_param('s', $nombre);//vinculacion(bind), 'ss' se refiere a un string y otro string
         $stmt->execute();//ejejucar
         $resultado = $stmt->get_result();//obtener resultado
 

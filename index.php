@@ -1,3 +1,18 @@
+
+<?php require "controladores/controladorUsuario.php";?>
+<?php //require "controladores/controladorActividad.php";?>
+<!-- -----------------------------------------SESSION--------------------------------------------------------------------------------------- -->
+<?php 
+  session_start();//Inicializar la session siempre.
+  comprobarLogin();
+?>
+<!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -39,7 +54,9 @@
             <a class="nav-link" href="#" id="Salir">Salir</a>
           </li>
           <ul class="nav">
+          
             <img class="imgNavbar" src="https://graph.facebook.com/66200111/picture?width=64&height=64" />
+            <h4 class="pl-3 pt-2"> <?php echo  $_SESSION["usuario"]["nombre"] ?></h4>
             </a>
             </li>
           </ul>

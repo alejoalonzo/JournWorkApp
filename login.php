@@ -31,6 +31,7 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <script src="scripts/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="./estilos/estilos.css" />
     <title>Login</title>
   </head>
@@ -46,9 +47,18 @@
           <input class="form-control" type="password" placeholder="Contraseña" name="password" required/>
           <input class="form-control" type="submit" placeholder="Entrar" name="entrar" value="Entrar"/>
           <input class="form-control" type="submit" placeholder="Registrar" name="registrar" value="Registrar"/>
-        </form>
+        </form>  
+         <?php
+            if(isset($errorLogin)){
+                echo "<script>";
+                echo "contrasenaIncorrecta();";
+                echo "</script>";
+            }
+          ?>
       </div>
+   
     </div>
+   
   </body>
 </html>
 
