@@ -5,7 +5,7 @@
     $server = "localhost";
     $userDB = "root";
     $passwordDB = "";
-    $nameDataBAse = "fichaje_db";
+    $nameDataBAse = "fichajebbdd";
 
     $conexion = mysqli_connect($server, $userDB, $passwordDB, $nameDataBAse);
 

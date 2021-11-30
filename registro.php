@@ -5,7 +5,7 @@
     session_start();//Siempre iniciar la session
     if(isset($_POST["registro"])){//si le da al boton de registrar...
         //envio estos parametros por POST para crear usuario
-        registrarUsuario(rand(1,99), 
+        registrarUsuario(null, 
                             $_POST['password'],
                             $_POST['email'],
                             $_POST['name']);
