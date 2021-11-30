@@ -5,6 +5,45 @@
 <?php 
   session_start();//Inicializar la session siempre.
   comprobarLogin();
+
+
+
+  $salida = date("H:i:s");/*
+  $entrada = date("H:i:s");
+  $fecha = date("Y-m-d");*/
+  
+  function fechaEntrada(){
+    if(isset($_POST["entrar"])){//si le da al boton de fichar...
+      $fecha = date("Y-m-d");
+      return $fecha;
+    }
+  }
+  function horaEntrada(){
+    if(isset($_POST["entrar"])){//si le da al boton de fichar...
+      $entrada = date("H:i:s");
+      return $entrada;
+    }
+  }
+
+  $var1 = fechaEntrada();
+  $var2 = horaEntrada();
+
+  // echo $var1;
+  // echo $var2;
+
+  // if(isset($_POST["entrar"])){//si le da al boton de fichar...
+  //   crearActividadEnDB(NULL, $var1, $var2, null, '56', '5');
+    
+  // }
+
+  
+  if(isset($_POST["salir"])){//si le da al boton de fichar...
+    crearActividadEnDB(NULL, $var1, $var2, $salida, '56', '5');
+    
+  }
+
+
+
 ?>
 <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -78,10 +117,13 @@
   </div>
   </div>
   <!-- --------------------------------------BOTON------------------------------------------------------ -->
-  <div class="row justify-content-center">
-    <button  type="button" class="btn btn-outline-dark col-1 "><h3>Fichar</h3></button>
-    
-  </div>
+  <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <div class="row justify-content-center">
+      <button  type="submit" class="btn btn-outline-dark col-1 m-2 " name="entrar"><h3>Entrar</h3></button>
+      <button  type="submit" class="btn btn-outline-dark col-1 m-2" name="salir"><h3>Salir</h3></button>
+      
+    </div>
+  </form>
 
   <!-- ------------------------------------FIN--BOTON------------------------------------------------------ -->
   

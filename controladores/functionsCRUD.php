@@ -17,10 +17,10 @@
         }
 
     }
-    function crearActividadEnDB ($titulo, $ciudad, $fecha, $precio, $usuario){//Debe corresponder con los campos de la BBDD
+    function crearActividadEnDB ($id, $fecha, $entrada, $salida, $total, $usuario){//Debe corresponder con los campos de la BBDD
         global $conexion;
-        $consulta = "INSERT INTO actividades (titulo, ciudad, fecha, precio, usuario)
-                    VALUES ('$titulo','$ciudad','$fecha','$precio', '$usuario')";
+        $consulta = "INSERT INTO actividades (id, fecha, entrada, salida, total, usuario)
+                    VALUES ('$id','$fecha','$entrada','$salida', '$total', '$usuario')";
         $resultado = mysqli_query($conexion, $consulta);
         if($resultado){
             return true;
