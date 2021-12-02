@@ -32,6 +32,7 @@
       crossorigin="anonymous"
     />
     <script src="scripts/sweetalert2.all.min.js"></script>
+    <script src="scripts/script.js"></script>
     <link rel="stylesheet" href="./estilos/estilos.css" />
     <title>Login</title>
   </head>

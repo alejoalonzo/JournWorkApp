@@ -1,3 +1,4 @@
+<?php require "controladores/controladorUsuario.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +6,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../estilos/estilos.css" />
+  <link rel="stylesheet" href="./estilos/estilos.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-  <script src="../scripts/script.js"></script>
+  <script src="./scripts/script.js"></script>
   <title>Calendario</title>
 </head>
 
@@ -17,7 +18,7 @@
 
   <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand" href="#"><img src="../media/Logo.png" class="logo-brand" alt="logo" /></a>
+      <a class="navbar-brand" href="#"><img src="./media/Logo.png" class="logo-brand" alt="logo" /></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <ion-icon name="menu-outline"></ion-icon>
@@ -26,21 +27,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="../index.html" id="home">Inicio </a>
+            <a class="nav-link" href="./index.php" id="home">Inicio </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" id="Calendario">Calendario</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="./fichaje.html" id="Fichaje">Fichaje</a>
+            <a class="nav-link" href="./fichaje.php" id="Fichaje">Fichaje</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#" id="Salir">Salir</a>
+            <a class="nav-link" href="logout.php" id="Salir">Salir</a>
           </li>
           <ul class="nav">
             <img class="imgNavbar" src="https://graph.facebook.com/66200111/picture?width=64&height=64" />
+            <!-- <h4 class="pl-3 pt-2"> <?php// echo  $_SESSION["usuario"]["nombre"] ?></h4> -->
             </a>
             </li>
           </ul>

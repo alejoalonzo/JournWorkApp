@@ -92,4 +92,45 @@
 
     }
 
+
+
+
+    function crearActividadEnDBEntrada($id, $fecha, $entrada, $salida, $total, $usuario)
+{ //Debe corresponder con los campos de la BBDD
+    global $conexion;
+    $consulta = "INSERT INTO actividades (id, fecha, entrada, salida, total, usuario)
+                    VALUES ('$id','$fecha','$entrada','$salida', '$total', '$usuario')";
+    $resultado = mysqli_query($conexion, $consulta);
+    if ($resultado) {
+        return true;
+    } else {
+        echo $conexion->error;
+        return false;
+    }
+}
+
+function recuperarActividadEnDB($fecha, $usuario)
+{ //Debe corresponder con los campos de la BBDD
+    global $conexion;
+    $consulta = "SELECT * FROM actividades WHERE fecha='$fecha' AND usuario='$usuario'";
+    $resultado = mysqli_query($conexion, $consulta);
+    $fila = mysqli_fetch_assoc($resultado);
+
+    return $fila;
+}
+
+function modificarActividadEnDB($id,  $salida)
+{ //Debe corresponder con los campos de la BBDD
+    global $conexion;
+    $consulta = "UPDATE actividades
+                        SET salida = '$salida'
+                        WHERE id = '$id'";
+    $resultado = mysqli_query($conexion, $consulta);
+    if ($resultado) {
+        return true;
+    } else {
+        echo $conexion->error;
+        return false;
+    }
+}
 ?>

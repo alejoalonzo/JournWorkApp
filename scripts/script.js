@@ -27,6 +27,7 @@ function contrasenaIncorrecta() {
     footer: '<a href="./registro.php">No estoy registrado</a>',
   });
 }
+
 //-------------------------------------------------------CALENDARIO---------------------------------
 //Arrays de datos:
 meses = [
@@ -207,6 +208,10 @@ function mifecha() {
     cabecera(); //escribir cabecera
     escribirdias(); //escribir tabla
   }
+}
+
+function errorr() {
+  alert("errooooor");
 }
 
 /*****************************************COLLLAPSE EN FICHAJE*******************************/

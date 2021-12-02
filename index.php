@@ -3,14 +3,14 @@
 <?php //require "controladores/controladorActividad.php";?>
 <!-- -----------------------------------------SESSION--------------------------------------------------------------------------------------- -->
 <?php 
-  session_start();//Inicializar la session siempre.
-  comprobarLogin();
+  // session_start();//Inicializar la session siempre.
+  // comprobarLogin();
 
 
 
-  $salida = date("H:i:s");
-  $entrada = date("H:i:s");
-  $fecha = date("Y-m-d");
+  // $salida = date("H:i:s");
+  // $entrada = date("H:i:s");
+  // $fecha = date("Y-m-d");
   
   // function fechaEntrada(){
   //   if(isset($_POST["entrar"])){//si le da al boton de fichar...
@@ -31,37 +31,37 @@
   // echo $var1;
   // echo $var2;
 
-  if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
-    $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
-  }
+  // if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
+  //   $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
+  // }
 
 
 
-  if(isset($_POST["entrar"])){//si le da al boton de fichar...
-    crearActividadEnDB(NULL, $fecha, $entrada, null, '56', $_SESSION["usuario"]["id"]);
+  // if(isset($_POST["entrar"])){//si le da al boton de fichar...
+  //   crearActividadEnDB(NULL, $fecha, $entrada, null, '56', $_SESSION["usuario"]["id"]);
     
-  }
+  // }
 
   
-  if(isset($_POST["salir"])){//si le da al boton de fichar...
-    crearActividadEnDB(NULL, null, null, $salida, '56', $_SESSION["usuario"]["id"]);
+  // if(isset($_POST["salir"])){//si le da al boton de fichar...
+  //   crearActividadEnDB(NULL, null, null, $salida, '56', $_SESSION["usuario"]["id"]);
     
-  }
+  // }
 
-  $entradaFichaje = '22:36:59';
-  $salidaFichaje = '25:36:59';
+  // $entradaFichaje = '22:36:59';
+  // $salidaFichaje = '25:36:59';
 
-  $entradaSinPuntos = str_replace(":", "", $entradaFichaje);
-  $salidaSinPuntos = str_replace(":", "", $salidaFichaje);
+  // $entradaSinPuntos = str_replace(":", "", $entradaFichaje);
+  // $salidaSinPuntos = str_replace(":", "", $salidaFichaje);
   
 
-  $integer = (int)$entradaSinPuntos;
-  $integer2 = (int)$salidaSinPuntos;
+  // $integer = (int)$entradaSinPuntos;
+  // $integer2 = (int)$salidaSinPuntos;
   
 
-   $resutado = $integer2 -$integer;
+  //  $resutado = $integer2 -$integer;
 
-   echo $resutado;
+  //  echo $resutado;
 
 
   /*
@@ -69,7 +69,47 @@
   FROM actividades 
   WHERE salida > '0000-00-00 00:00:00'*/
 
+  session_start(); //Inicializar la session siempre.
+  comprobarLogin();
+  
+  
+  function fechaActual()
+  {
+    //si le da al boton de fichar...
+    $fecha = date("Y-m-d");
+    return $fecha;
+  }
+  function horaActual()
+  {
+    //si le da al boton de fichar...
+    $entrada = date("H:i:s");
+    return $entrada;
+  }
+  
+  
+  
+  // echo $var1;
+  // echo $var2;
 
+  if (isset($_POST["entrar"])){
+    $var1 = fechaActual();
+    $var2 = horaActual();
+    $idActividad = crearActividadEnDBEntrada(NULL, $var1, $var2, null, '56', $_SESSION["usuario"]["id"]);
+    //$errorFichajeEntrar ="";
+  }
+
+ 
+
+  
+ 
+    if (isset($_POST["salir"])) {
+      $var1 = fechaActual();
+      $var2 = horaActual();
+      $fila = recuperarActividadEnDB($var1, $_SESSION["usuario"]["id"]);
+      modificarActividadEnDB($fila['id'], $var2);
+    }
+  
+    // $var2->modify('-5 hours');
 ?>
 <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -108,11 +148,11 @@
             <a class="nav-link" href="#" id="home">Inicio </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./php/calendario.html" id="Calendario">Calendario</a>
+            <a class="nav-link" href="./calendario.php" id="Calendario">Calendario</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="./php/fichaje.html" id="Fichaje">Fichaje</a>
+            <a class="nav-link" href="./fichaje.php" id="Fichaje">Fichaje</a>
           </li>
 
           <li class="nav-item">
@@ -165,6 +205,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+  <?php
+    if(isset($errorFichajeEntrar)){
+      echo "<script>";
+      echo "errorr();";
+      echo "</script>";
+    }
+  ?>
   <script>
     setInterval(heroSlideShow, 3000);
   </script>
