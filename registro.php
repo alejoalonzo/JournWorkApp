@@ -33,7 +33,7 @@
 
   <body id="registro">
     <div class="row justify-content-center cen pt-5 mt-5">
-      <div class="col-md-3">
+      <div class="col-s-3">
         <div>
           <img src="./media/Logo.png" alt="" />
         </div>

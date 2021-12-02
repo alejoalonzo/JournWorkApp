@@ -8,40 +8,66 @@
 
 
 
-  $salida = date("H:i:s");/*
+  $salida = date("H:i:s");
   $entrada = date("H:i:s");
-  $fecha = date("Y-m-d");*/
+  $fecha = date("Y-m-d");
   
-  function fechaEntrada(){
-    if(isset($_POST["entrar"])){//si le da al boton de fichar...
-      $fecha = date("Y-m-d");
-      return $fecha;
-    }
-  }
-  function horaEntrada(){
-    if(isset($_POST["entrar"])){//si le da al boton de fichar...
-      $entrada = date("H:i:s");
-      return $entrada;
-    }
-  }
+  // function fechaEntrada(){
+  //   if(isset($_POST["entrar"])){//si le da al boton de fichar...
+  //     $fecha = date("Y-m-d");
+  //     return $fecha;
+  //   }
+  // }
+  // function horaEntrada(){
+  //   if(isset($_POST["entrar"])){//si le da al boton de fichar...
+  //     $entrada = date("H:i:s");
+  //     return $entrada;
+  //   }
+  // }
 
-  $var1 = fechaEntrada();
-  $var2 = horaEntrada();
+  // $var1 = fechaEntrada();
+  // $var2 = horaEntrada();
 
   // echo $var1;
   // echo $var2;
 
-  // if(isset($_POST["entrar"])){//si le da al boton de fichar...
-  //   crearActividadEnDB(NULL, $var1, $var2, null, '56', '5');
-    
-  // }
+  if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
+    $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
+  }
 
-  
-  if(isset($_POST["salir"])){//si le da al boton de fichar...
-    crearActividadEnDB(NULL, $var1, $var2, $salida, '56', '5');
+
+
+  if(isset($_POST["entrar"])){//si le da al boton de fichar...
+    crearActividadEnDB(NULL, $fecha, $entrada, null, '56', $_SESSION["usuario"]["id"]);
     
   }
 
+  
+  if(isset($_POST["salir"])){//si le da al boton de fichar...
+    crearActividadEnDB(NULL, null, null, $salida, '56', $_SESSION["usuario"]["id"]);
+    
+  }
+
+  $entradaFichaje = '22:36:59';
+  $salidaFichaje = '25:36:59';
+
+  $entradaSinPuntos = str_replace(":", "", $entradaFichaje);
+  $salidaSinPuntos = str_replace(":", "", $salidaFichaje);
+  
+
+  $integer = (int)$entradaSinPuntos;
+  $integer2 = (int)$salidaSinPuntos;
+  
+
+   $resutado = $integer2 -$integer;
+
+   echo $resutado;
+
+
+  /*
+  SELECT salida 
+  FROM actividades 
+  WHERE salida > '0000-00-00 00:00:00'*/
 
 
 ?>
