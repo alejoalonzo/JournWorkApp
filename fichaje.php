@@ -1,5 +1,7 @@
 <?php
-  require "controladores/conexion.php";
+require "controladores/conexion.php";
+//require "controladores/controladorUsuario.php";
+session_start();
 ?>
 
 
@@ -10,8 +12,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
   <link rel="stylesheet" href="./estilos/estilos.css" />
   <script src="./scripts/script.js"></script>
   <title>Fichaje</title>
@@ -24,8 +25,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" href="#"><img src="./media/Logo.png" class="logo-brand" alt="logo" /></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <ion-icon name="menu-outline"></ion-icon>
       </button>
 
@@ -47,7 +47,7 @@
           </li>
           <ul class="nav">
             <img class="imgNavbar" src="https://graph.facebook.com/66200111/picture?width=64&height=64" />
-            <!-- <h4 class="pl-3 pt-2"> <?php// echo  $_SESSION["usuario"]["nombre"] ?></h4> -->
+            <h4 class="pl-3 pt-2"> <?php echo  $_SESSION["usuario"]["nombre"] ?></h4>
             </a>
             </li>
           </ul>
@@ -68,37 +68,32 @@
             <th scope="col">Tiempo</th>
           </tr>
           <?php
-            $sql= "SELECT * FROM actividades";
-            $result= mysqli_query($conexion, $sql);
-            while($mostrar=  mysqli_fetch_array($result)){
+          $sql = "SELECT * FROM actividades AS act,usuarios AS us WHERE act.usuario=us.id AND us.id=" . $_SESSION["usuario"]["id"];
+          $result = mysqli_query($conexion, $sql);
+          while ($mostrar =  mysqli_fetch_array($result)) {
 
-          
+
           ?>
         </thead>
         <tbody>
           <tr>
-            <th scope="row"><?php echo $mostrar['fecha']?></th>
-            <td><?php echo $mostrar['entrada']?></td>
-            <td><?php echo $mostrar['salida']?></td>
-            <td><?php echo $mostrar['total']?></td>
+            <th scope="row"> <?php echo $mostrar['fecha'] ?></th>
+            <td><?php echo $mostrar['entrada'] ?></td>
+            <td><?php echo $mostrar['salida'] ?></td>
+            <td><?php echo $mostrar['total'] ?></td>
           </tr>
-          
+          <?php //echo $mostrar['nombre'] 
+          ?>
         </tbody>
-        <?php
-        }
-        
-        ?>
+      <?php
+          }
+
+      ?>
       </table>
     </div>
   </div>
 
 
-
-
-
-  <!-- <p id="tablaFichaje">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, error? Vitae commodi et
-    exercitationem? Qui iste quod quisquam, corrupti officiis veniam molestias alias. A, praesentium ipsum asperiores
-    itaque repellat quibusdam!</p> -->
 
 
 </body>

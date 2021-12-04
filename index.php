@@ -1,115 +1,72 @@
 
-<?php require "controladores/controladorUsuario.php";?>
-<?php //require "controladores/controladorActividad.php";?>
+<?php require "controladores/controladorUsuario.php"; ?>
+
 <!-- -----------------------------------------SESSION--------------------------------------------------------------------------------------- -->
-<?php 
-  // session_start();//Inicializar la session siempre.
-  // comprobarLogin();
+<?php
+$mensajePicaje = "";
+$picajeCorrecto = "";
 
 
-
-  // $salida = date("H:i:s");
-  // $entrada = date("H:i:s");
-  // $fecha = date("Y-m-d");
-  
-  // function fechaEntrada(){
-  //   if(isset($_POST["entrar"])){//si le da al boton de fichar...
-  //     $fecha = date("Y-m-d");
-  //     return $fecha;
-  //   }
-  // }
-  // function horaEntrada(){
-  //   if(isset($_POST["entrar"])){//si le da al boton de fichar...
-  //     $entrada = date("H:i:s");
-  //     return $entrada;
-  //   }
-  // }
-
-  // $var1 = fechaEntrada();
-  // $var2 = horaEntrada();
-
-  // echo $var1;
-  // echo $var2;
-
-  // if(isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])){
-  //   $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
-  // }
+session_start(); //Inicializar la session siempre.
+comprobarLogin();
 
 
-
-  // if(isset($_POST["entrar"])){//si le da al boton de fichar...
-  //   crearActividadEnDB(NULL, $fecha, $entrada, null, '56', $_SESSION["usuario"]["id"]);
-    
-  // }
-
-  
-  // if(isset($_POST["salir"])){//si le da al boton de fichar...
-  //   crearActividadEnDB(NULL, null, null, $salida, '56', $_SESSION["usuario"]["id"]);
-    
-  // }
-
-  // $entradaFichaje = '22:36:59';
-  // $salidaFichaje = '25:36:59';
-
-  // $entradaSinPuntos = str_replace(":", "", $entradaFichaje);
-  // $salidaSinPuntos = str_replace(":", "", $salidaFichaje);
-  
-
-  // $integer = (int)$entradaSinPuntos;
-  // $integer2 = (int)$salidaSinPuntos;
-  
-
-  //  $resutado = $integer2 -$integer;
-
-  //  echo $resutado;
+function fechaActual()
+{
+  //si le da al boton de fichar...
+  $fecha = date("Y-m-d");
+  return $fecha;
+}
+function horaActual()
+{
+  //si le da al boton de fichar...
+  $entrada = date("H:i:s");
+  return $entrada;
+}
 
 
-  /*
-  SELECT salida 
-  FROM actividades 
-  WHERE salida > '0000-00-00 00:00:00'*/
-
-  session_start(); //Inicializar la session siempre.
-  comprobarLogin();
-  
-  
-  function fechaActual()
-  {
-    //si le da al boton de fichar...
-    $fecha = date("Y-m-d");
-    return $fecha;
+if (isset($_POST["entrar"])) {
+  $fechaActual = fechaActual();
+  $horaEntrada = horaActual();
+  //Comprobar que no existe picaje de entrada para el usuario logado en la fecha que se realiza
+  $actividadActual = recuperarActividadEnDB($fechaActual,  $_SESSION["usuario"]["id"]);
+  if ($actividadActual != null) {
+    $mensajePicaje = "Ya has realizado un picaje de entrada con el usuario " . $_SESSION["usuario"]["nombre"] . " a fecha " . $fechaActual;
+  } else {
+    $idActividad = crearActividadEnDBEntrada(NULL, $fechaActual, $horaEntrada, $_SESSION["usuario"]["id"]);
+    $picajeCorrecto = "Se ha realizado el picaje de entrada correctamente a la hora " . $horaEntrada;
   }
-  function horaActual()
-  {
-    //si le da al boton de fichar...
-    $entrada = date("H:i:s");
-    return $entrada;
-  }
-  
-  
-  
-  // echo $var1;
-  // echo $var2;
+}
 
-  if (isset($_POST["entrar"])){
-    $var1 = fechaActual();
-    $var2 = horaActual();
-    $idActividad = crearActividadEnDBEntrada(NULL, $var1, $var2, null, '56', $_SESSION["usuario"]["id"]);
-    //$errorFichajeEntrar ="";
-  }
 
- 
+//Modificar en base de datos Salida y total poner Null
 
-  
- 
-    if (isset($_POST["salir"])) {
-      $var1 = fechaActual();
-      $var2 = horaActual();
-      $fila = recuperarActividadEnDB($var1, $_SESSION["usuario"]["id"]);
-      modificarActividadEnDB($fila['id'], $var2);
+
+if (isset($_POST["salir"])) {
+  $fechaActual = fechaActual();
+  $horaSalida = horaActual();
+  //Comprobar que no existe picaje de salida para el usuario logado ni está intentado picar salida antes de entrada
+  $actividadActual = recuperarActividadEnDB($fechaActual, $_SESSION["usuario"]["id"]);
+
+  if ($actividadActual == null) {
+    $mensajePicaje = "Estás intentando realizar un picaje de salida cuando aún no se ha realizado el picaje de entrada.";
+  } else {
+    if ($actividadActual['salida'] != null) {
+
+      $mensajePicaje = "Error, ya tienes registrado un picaje de salida a las " . $actividadActual['salida'];
+    } else {
+
+
+      //Calculo de horas entre dos fechas
+      $horasTotales = ROUND(abs(strtotime($horaSalida) - strtotime($actividadActual['entrada'])) / (60 * 60), 5);
+      modificarActividadEnDB($actividadActual['id'], $horaSalida, $horasTotales);
+      $picajeCorrecto = "Se ha realizado el picaje de salida correctamente a la hora " . $horaSalida;
     }
-  
-    // $var2->modify('-5 hours');
+  }
+}
+
+
+
 ?>
 <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -125,8 +82,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
   <link rel="stylesheet" href="./estilos/estilos.css" />
   <script src="./scripts/script.js"></script>
   <title>Home</title>
@@ -137,8 +93,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" href="#"><img src="./media/Logo.png" class="logo-brand" alt="logo" /></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <ion-icon name="menu-outline"></ion-icon>
       </button>
 
@@ -159,8 +114,17 @@
             <a class="nav-link" href="logout.php" id="Salir">Salir</a>
           </li>
           <ul class="nav">
-          
+
             <img class="imgNavbar" src="https://graph.facebook.com/66200111/picture?width=64&height=64" />
+            <?php
+
+            if (isset($_COOKIE["ifpUser"]) && !isset($_SESSION["usuario"])) {
+              $_SESSION["usuario"] = obtenerUsuarioPorId($_COOKIE["ifpUser"]);
+            }
+
+
+
+            ?>
             <h4 class="pl-3 pt-2"> <?php echo  $_SESSION["usuario"]["nombre"] ?></h4>
             </a>
             </li>
@@ -179,39 +143,46 @@
       Con Journ Work el control <br>
       horario es mucho más fácil
     </h1>
-    <!-- <img class="btnFichaje" src="./media/enter1.jpg" alt="boton fichaje"> -->
+
   </div>
   </div>
+
+
+
+
   <!-- --------------------------------------BOTON------------------------------------------------------ -->
-  <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <div class="row justify-content-center">
-      <button  type="submit" class="btn btn-outline-dark col-1 m-2 " name="entrar"><h3>Entrar</h3></button>
-      <button  type="submit" class="btn btn-outline-dark col-1 m-2" name="salir"><h3>Salir</h3></button>
-      
+      <button type="submit" class="btn btn-outline-dark col-1 m-2 " name="entrar">
+        <h3>Entrar</h3>
+      </button>
+      <button type="submit" class="btn btn-outline-dark col-1 m-2" name="salir">
+        <h3>Salir</h3>
+      </button>
+
     </div>
+
+
+    <h4 class="row justify-content-center pt-5 text-danger"><?php echo $mensajePicaje; ?></h4>
+    <h4 class="row justify-content-center pt-5 text-success"><?php echo $picajeCorrecto; ?></h4>
   </form>
 
   <!-- ------------------------------------FIN--BOTON------------------------------------------------------ -->
-  
 
 
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+
+  <script src=" https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <?php
-    if(isset($errorFichajeEntrar)){
-      echo "<script>";
-      echo "errorr();";
-      echo "</script>";
-    }
+  if (isset($errorFichajeEntrar)) {
+    echo "<script>";
+    echo "errorr();";
+    echo "</script>";
+  }
   ?>
   <script>
     setInterval(heroSlideShow, 3000);

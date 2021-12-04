@@ -5,7 +5,7 @@
     $server = "localhost";
     $userDB = "root";
     $passwordDB = "";
-    $nameDataBAse = "fichajebbdd";
+    $nameDataBAse = "fichajedb";
 
     $conexion = mysqli_connect($server, $userDB, $passwordDB, $nameDataBAse);
 
@@ -23,6 +23,3 @@
     //      $email = $_POST["email"];
     //      $password =  $_POST["password"];
     //  }
-
-
-?>

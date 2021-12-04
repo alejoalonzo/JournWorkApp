@@ -1,4 +1,6 @@
-<?php require "controladores/controladorUsuario.php";?>
+<?php require "controladores/controladorUsuario.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./estilos/estilos.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
   <script src="./scripts/script.js"></script>
   <title>Calendario</title>
 </head>
@@ -19,8 +20,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" href="#"><img src="./media/Logo.png" class="logo-brand" alt="logo" /></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <ion-icon name="menu-outline"></ion-icon>
       </button>
 
@@ -42,7 +42,7 @@
           </li>
           <ul class="nav">
             <img class="imgNavbar" src="https://graph.facebook.com/66200111/picture?width=64&height=64" />
-            <!-- <h4 class="pl-3 pt-2"> <?php// echo  $_SESSION["usuario"]["nombre"] ?></h4> -->
+            <h4 class="pl-3 pt-2"> <?php echo  $_SESSION["usuario"]["nombre"] ?></h4>
             </a>
             </li>
           </ul>

@@ -5,11 +5,7 @@
 #login {
   background-color: #ffae12;
 }
-/* #cajaContenedora {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+
 .form-control {
   margin-top: 10px !important;
 }
@@ -177,13 +173,6 @@ h1 {
   font-size: 1.5rem;
   background-color: #494856;
 }
-
-/*Paleta de colores*/
-/* e8e8db
-ffdf65
-858377
-#636057
-494856 */
 
 /**********************FIN CALENDARIO****************************************/
 
