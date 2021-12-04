@@ -32,9 +32,13 @@ if (isset($_POST["entrar"])) {
   $actividadActual = recuperarActividadEnDB($fechaActual,  $_SESSION["usuario"]["id"]);
   if ($actividadActual != null) {
     $mensajePicaje = "Ya has realizado un picaje de entrada con el usuario " . $_SESSION["usuario"]["nombre"] . " a fecha " . $fechaActual;
+    $errorAlertPicaje ="";
   } else {
     $idActividad = crearActividadEnDBEntrada(NULL, $fechaActual, $horaEntrada, $_SESSION["usuario"]["id"]);
+
     $picajeCorrecto = "Se ha realizado el picaje de entrada correctamente a la hora " . $horaEntrada;
+    $okAlertPicaje ="";
+    
   }
 }
 
@@ -50,10 +54,12 @@ if (isset($_POST["salir"])) {
 
   if ($actividadActual == null) {
     $mensajePicaje = "Estás intentando realizar un picaje de salida cuando aún no se ha realizado el picaje de entrada.";
+    $errorAlertPicaje ="";
   } else {
     if ($actividadActual['salida'] != null) {
 
       $mensajePicaje = "Error, ya tienes registrado un picaje de salida a las " . $actividadActual['salida'];
+      $errorAlertPicaje ="";
     } else {
 
 
@@ -61,6 +67,7 @@ if (isset($_POST["salir"])) {
       $horasTotales = ROUND(abs(strtotime($horaSalida) - strtotime($actividadActual['entrada'])) / (60 * 60), 5);
       modificarActividadEnDB($actividadActual['id'], $horaSalida, $horasTotales);
       $picajeCorrecto = "Se ha realizado el picaje de salida correctamente a la hora " . $horaSalida;
+      $okAlertPicaje ="";
     }
   }
 }
@@ -85,6 +92,7 @@ if (isset($_POST["salir"])) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
   <link rel="stylesheet" href="./estilos/estilos.css" />
   <script src="./scripts/script.js"></script>
+  <script src="./scripts/sweetalert2.all.min.js"></script>
   <title>Home</title>
 </head>
 
@@ -163,8 +171,18 @@ if (isset($_POST["salir"])) {
     </div>
 
 
-    <h4 class="row justify-content-center pt-5 text-danger"><?php echo $mensajePicaje; ?></h4>
-    <h4 class="row justify-content-center pt-5 text-success"><?php echo $picajeCorrecto; ?></h4>
+    <h5 class="row justify-content-center pt-3 text-danger"><?php echo $mensajePicaje; 
+                                                                  if (isset($errorAlertPicaje)) {
+                                                                    echo "<script>";
+                                                                    echo "fichajeIncorrecto();";
+                                                                    echo "</script>";
+                                                                  }?></h5>
+    <h5 class="row justify-content-center pt-3 text-success"><?php echo $picajeCorrecto; 
+                                                                    if (isset($okAlertPicaje)) {
+                                                                      echo "<script>";
+                                                                      echo "fichajeCorrecto();";
+                                                                      echo "</script>";
+                                                                    }?></h5>
   </form>
 
   <!-- ------------------------------------FIN--BOTON------------------------------------------------------ -->

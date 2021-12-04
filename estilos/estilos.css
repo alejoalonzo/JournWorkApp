@@ -21,12 +21,12 @@
 .nav-link {
   color: #ffffff;
   margin-right: 30px;
+  transition: 0.3s ease-in;
 }
 
 .nav-link:hover {
-  color: #4e4e4e;
-  background-color: #239e5a;
-  border-radius: 3px;
+  color: #f1f1f1;
+  font-size: 2rem;
 }
 
 .logo-brand {
@@ -86,7 +86,7 @@ h1 {
 }
 /*div principal del calendario*/
 #calendario {
-  border: 1px solid #222;
+  border: 1px solid #494856;
   border-radius: 15px;
   background-color: #fffafa;
   text-align: center;
@@ -94,7 +94,7 @@ h1 {
 }
 /*tabla del calendario*/
 #diasc {
-  border: 1px solid black;
+  border: 1px solid #494856;
   border-collapse: separate;
   border-spacing: 4px;
 }
@@ -168,6 +168,7 @@ h1 {
 }
 #titulos {
   padding: 0.2em;
+  color: #494856;
 }
 .textoCalendario {
   font-size: 1.5rem;

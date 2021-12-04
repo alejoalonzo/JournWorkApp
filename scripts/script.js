@@ -20,11 +20,31 @@ function heroSlideShow() {
 //----------------------------------------------------ALERT ERROR LOGIN----------------------------
 function contrasenaIncorrecta() {
   Swal.fire({
-    confirmButtonColor: "#5b789b",
+    confirmButtonColor: "#ffae12",
     icon: "error",
     title: "Oops...",
     text: "El usuario o la contraseña son incorrectos",
     footer: '<a href="./registro.php">No estoy registrado</a>',
+  });
+}
+
+function fichajeIncorrecto() {
+  Swal.fire({
+    confirmButtonColor: "#ffae12",
+    icon: "error",
+    title: "Oops...",
+    text: "Fichaje incorrecto ",
+    footer: "",
+  });
+}
+
+function fichajeCorrecto() {
+  Swal.fire({
+    position: "bottom-center",
+    icon: "success",
+    title: "Se ha realizado el picaje correctamente",
+    showConfirmButton: false,
+    timer: 3000,
   });
 }
 
